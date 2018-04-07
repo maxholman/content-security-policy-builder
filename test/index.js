@@ -117,4 +117,19 @@ describe('builder', function () {
       })
     })
   })
+
+  it('builds directives with functions', function () {
+    var result = builder({
+      directives: {
+        included: function (key) {
+          return ['a', 'b', key]
+        },
+        skipped: function (key) {
+          return false
+        }
+      }
+    })
+
+    assert.equal(result, 'included a b included')
+  })
 })

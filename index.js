@@ -11,7 +11,9 @@ module.exports = function (options) {
     }
     keysSeen[directive] = true
 
-    var value = directives[originalKey]
+    var originalValue = directives[originalKey]
+    var value = typeof originalValue === 'function' ? originalValue(originalKey) : originalValue
+
     if (Array.isArray(value)) {
       value = value.join(' ')
     } else if (value === true) {
